@@ -24,7 +24,7 @@ async function unlockDoors(req, res) {
   if (codeValid) {
     https.get(process.env.UNLOCK_URL, function(response) {
       if (response.statusCode == 200) {
-        res.send('Door Successfully Opened');
+        res.send('Door Successfully Opened, if you still cannot enter please call Dan at ' + process.env.ERROR_PHONE);
       } else {
         res.status(500).send('Error Opening Door, please call Dan at ' + process.env.ERROR_PHONE);
       }
