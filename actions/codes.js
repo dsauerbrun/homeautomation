@@ -33,7 +33,7 @@ async function expireCode(req, res) {
 async function listCodes(req, res) {
   let passcode = req.params.passcode;
   if (passcode == process.env.UNLOCK_CODE) {
-    let codes = await knex('access_codes').where('expired', false).andWhere('end_date', '>', moment().format('YYYY/MM/DD'));
+    let codes = await knex('access_codes').where('expired', false).andWhere('end_date', '>', moment().format('YYYY/MM/DD')).orderBy('start_date', 'asc');
     res.json(codes);
   } else {
     res.status(401).send('bad passcode');
