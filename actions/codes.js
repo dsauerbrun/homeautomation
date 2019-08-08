@@ -1,3 +1,4 @@
+var moment = require('moment');
 
 async function createCode(req, res) {
   let passcode = req.params.passcode;
@@ -28,7 +29,20 @@ async function expireCode(req, res) {
   res.end();
 }
 
+// lists upcoming and currently active codes
+async function listCodes(req, res) {
+  let passcode = req.params.passcode;
+  if (passcode == process.env.UNLOCK_CODE) {
+    let codes = await knex('access_codes').where('expired', false).andWhere('end_date', '>', moment().format('YYYY/MM/DD'));
+    res.json(codes);
+  } else {
+    res.status(401).send('bad passcode');
+  }
+
+}
+
 module.exports = {
   createCode: createCode,
   expireCode: expireCode,
+  listCodes: listCodes,
 }

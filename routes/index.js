@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/unlock/:code', locks.unlockDoors);
 router.get('/lock/:code', locks.lockDoors);
+router.get('/currentcodes/:passcode', codes.listCodes);
 router.post('/codes/:passcode/:code', codes.createCode);
 router.post('/codes/expire/:passcode/:code', codes.expireCode);
 
