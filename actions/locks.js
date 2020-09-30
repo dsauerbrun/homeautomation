@@ -1,5 +1,5 @@
 var https = require('https');
-var axios = require('axious');
+var axios = require('axios');
 var codeHelper = require('./codeHelper');
 
 async function lockDoors(req, res) {
